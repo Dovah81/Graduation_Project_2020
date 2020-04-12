@@ -1,4 +1,4 @@
-package com.example.grapro20;
+package com.njusoft.grapro20;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

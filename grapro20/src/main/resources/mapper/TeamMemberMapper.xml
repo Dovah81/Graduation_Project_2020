@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.TeamMemberMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.TeamMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="cretime" jdbcType="TIMESTAMP" property="cretime" />
+    <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
+    <result column="lastchecktime" jdbcType="TIMESTAMP" property="lastchecktime" />
+    <result column="repeat" jdbcType="VARCHAR" property="repeat" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from team_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.TeamMember">
+    insert into team_member (id, team_id, student_id, 
+      cretime, ifchecked, lastchecktime, 
+      repeat)
+    values (#{id,jdbcType=INTEGER}, #{teamId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{cretime,jdbcType=TIMESTAMP}, #{ifchecked,jdbcType=INTEGER}, #{lastchecktime,jdbcType=TIMESTAMP}, 
+      #{repeat,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.TeamMember">
+    update team_member
+    set team_id = #{teamId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
+      cretime = #{cretime,jdbcType=TIMESTAMP},
+      ifchecked = #{ifchecked,jdbcType=INTEGER},
+      lastchecktime = #{lastchecktime,jdbcType=TIMESTAMP},
+      repeat = #{repeat,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, team_id, student_id, cretime, ifchecked, lastchecktime, repeat
+    from team_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, team_id, student_id, cretime, ifchecked, lastchecktime, repeat
+    from team_member
+  </select>
+</mapper>

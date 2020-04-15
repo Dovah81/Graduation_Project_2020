@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.Team">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="leader_id" jdbcType="INTEGER" property="leaderId" />
+    <result column="ifexcellentteam" jdbcType="INTEGER" property="ifexcellentteam" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from team
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.Team">
+    insert into team (id, name, intro, 
+      leader_id, ifexcellentteam, reason
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{leaderId,jdbcType=INTEGER}, #{ifexcellentteam,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.Team">
+    update team
+    set name = #{name,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      leader_id = #{leaderId,jdbcType=INTEGER},
+      ifexcellentteam = #{ifexcellentteam,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, intro, leader_id, ifexcellentteam, reason
+    from team
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, intro, leader_id, ifexcellentteam, reason
+    from team
+  </select>
+</mapper>

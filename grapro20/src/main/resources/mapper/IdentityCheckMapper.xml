@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.IdentityCheckMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.IdentityCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="checkerid" jdbcType="INTEGER" property="checkerid" />
+    <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
+    <result column="repeat" jdbcType="VARCHAR" property="repeat" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from identity_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.IdentityCheck">
+    insert into identity_check (id, userid, usertype, 
+      checkerid, ifchecked, repeat
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, 
+      #{checkerid,jdbcType=INTEGER}, #{ifchecked,jdbcType=INTEGER}, #{repeat,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.IdentityCheck">
+    update identity_check
+    set userid = #{userid,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=INTEGER},
+      checkerid = #{checkerid,jdbcType=INTEGER},
+      ifchecked = #{ifchecked,jdbcType=INTEGER},
+      repeat = #{repeat,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, userid, usertype, checkerid, ifchecked, repeat
+    from identity_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userid, usertype, checkerid, ifchecked, repeat
+    from identity_check
+  </select>
+</mapper>

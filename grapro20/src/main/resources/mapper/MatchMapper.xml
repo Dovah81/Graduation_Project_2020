@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.MatchMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.Match">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="investor_id" jdbcType="INTEGER" property="investorId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="pictures" jdbcType="VARCHAR" property="pictures" />
+    <result column="reward" jdbcType="VARCHAR" property="reward" />
+    <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
+    <result column="repeat" jdbcType="VARCHAR" property="repeat" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from match
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.Match">
+    insert into match (id, investor_id, name, 
+      intro, pictures, reward, 
+      ifchecked, repeat)
+    values (#{id,jdbcType=INTEGER}, #{investorId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR}, #{reward,jdbcType=VARCHAR}, 
+      #{ifchecked,jdbcType=INTEGER}, #{repeat,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.Match">
+    update match
+    set investor_id = #{investorId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      pictures = #{pictures,jdbcType=VARCHAR},
+      reward = #{reward,jdbcType=VARCHAR},
+      ifchecked = #{ifchecked,jdbcType=INTEGER},
+      repeat = #{repeat,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, investor_id, name, intro, pictures, reward, ifchecked, repeat
+    from match
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, investor_id, name, intro, pictures, reward, ifchecked, repeat
+    from match
+  </select>
+</mapper>

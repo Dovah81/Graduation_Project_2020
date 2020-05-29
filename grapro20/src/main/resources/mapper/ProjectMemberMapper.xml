@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.ProjectMemberMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.ProjectMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="cretime" jdbcType="TIMESTAMP" property="cretime" />
+    <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
+    <result column="lastchecktime" jdbcType="TIMESTAMP" property="lastchecktime" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.ProjectMember">
+    insert into project_member (id, project_id, student_id, 
+      cretime, ifchecked, lastchecktime, 
+      message)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{cretime,jdbcType=TIMESTAMP}, #{ifchecked,jdbcType=INTEGER}, #{lastchecktime,jdbcType=TIMESTAMP}, 
+      #{message,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.ProjectMember">
+    update project_member
+    set project_id = #{projectId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
+      cretime = #{cretime,jdbcType=TIMESTAMP},
+      ifchecked = #{ifchecked,jdbcType=INTEGER},
+      lastchecktime = #{lastchecktime,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, project_id, student_id, cretime, ifchecked, lastchecktime, message
+    from project_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, project_id, student_id, cretime, ifchecked, lastchecktime, message
+    from project_member
+  </select>
+  <select id="selCheckByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project_member.id, project_id, project_member.student_id, project_member.cretime, project_member.ifchecked, project_member.lastchecktime, project_member.message
+    from project_member INNER JOIN project
+    where project.student_id=#{userid} and project_member.project_id = project.id
+  </select>
+</mapper>

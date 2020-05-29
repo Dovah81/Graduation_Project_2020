@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njusoft.grapro20.mapper.ProjectInvestmentMapper">
+  <resultMap id="BaseResultMap" type="com.njusoft.grapro20.model.ProjectInvestment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="investor_id" jdbcType="INTEGER" property="investorId" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="cretime" jdbcType="TIMESTAMP" property="cretime" />
+    <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
+    <result column="lastchecktime" jdbcType="TIMESTAMP" property="lastchecktime" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_investment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njusoft.grapro20.model.ProjectInvestment">
+    insert into project_investment (id, project_id, investor_id, 
+      amount, cretime, ifchecked, 
+      lastchecktime, message)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{investorId,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DOUBLE}, #{cretime,jdbcType=TIMESTAMP}, #{ifchecked,jdbcType=INTEGER}, 
+      #{lastchecktime,jdbcType=TIMESTAMP}, #{message,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njusoft.grapro20.model.ProjectInvestment">
+    update project_investment
+    set project_id = #{projectId,jdbcType=INTEGER},
+      investor_id = #{investorId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      cretime = #{cretime,jdbcType=TIMESTAMP},
+      ifchecked = #{ifchecked,jdbcType=INTEGER},
+      lastchecktime = #{lastchecktime,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, project_id, investor_id, amount, cretime, ifchecked, lastchecktime, message
+    from project_investment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, project_id, investor_id, amount, cretime, ifchecked, lastchecktime, message
+    from project_investment
+  </select>
+  <select id="selCheckByStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project_investment.id, project_investment.project_id, project_investment.investor_id, project_investment.amount, project_investment.cretime, project_investment.ifchecked, project_investment.lastchecktime,project_investment.message
+    from project_investment INNER JOIN project
+    where project.student_id=#{userid} and project_investment.project_id = project.id
+  </select>
+  <select id="selCheckByInvestor" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, project_id, investor_id, amount, cretime, ifchecked, lastchecktime, message
+    from project_investment
+    where investor_id=#{userid}
+  </select>
+</mapper>

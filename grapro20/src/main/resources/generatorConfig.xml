@@ -3,7 +3,8 @@
     PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
   <generatorConfiguration>
-
+    <classPathEntry
+            location="D:\homework\demo\lib\mysql-connector-java-5.1.39-bin.jar" />
 	 <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         
      
@@ -23,23 +24,34 @@
         </jdbcConnection>
 
        		 <!--生成model类的存放位置 -->
-         <javaModelGenerator targetPackage="com.njusoft.grapro20.model" targetProject="src/main/java">
+         <javaModelGenerator targetPackage="com.njusoft.grapro20.model" targetProject="grapro20/src/main/java">
              <property name="enableSubPackages" value="true"/>
              <property name="trimStrings" value="true"/>
          </javaModelGenerator>
         
 		 <!-- 生成映射文件的存放位置 -->
-         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+         <sqlMapGenerator targetPackage="mapper" targetProject="grapro20/src/main/resources">
              <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
       
 	     <!-- 生成Dao类的存放位置-->
-         <javaClientGenerator type="XMLMAPPER" targetPackage="com.njusoft.grapro20.mapper" targetProject="src/main/java">
+         <javaClientGenerator type="XMLMAPPER" targetPackage="com.njusoft.grapro20.mapper" targetProject="grapro20/src/main/java">
              <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
          
 		 <!-- 生成对应的表及类名 -->
-         <table tableName="logger_info" domainObjectName="LoggerInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="admin" domainObjectName="Admin" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="student" domainObjectName="Student" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="investor" domainObjectName="Investor" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="project_member" domainObjectName="ProjectMember" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="project_investment" domainObjectName="ProjectInvestment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="team" domainObjectName="Team" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="team_member" domainObjectName="TeamMember" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="match" domainObjectName="Match" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="match_competitor" domainObjectName="MatchCompetitor" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="identity_check" domainObjectName="IdentityCheck" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="startup_knowledge" domainObjectName="StartupKnowledge" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 
      </context>

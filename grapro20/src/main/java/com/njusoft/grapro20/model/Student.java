@@ -90,4 +90,19 @@ public class Student {
     public void setTeamid(Integer teamid) {
         this.teamid = teamid;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", intro='" + intro + '\'' +
+                ", age=" + age +
+                ", college='" + college + '\'' +
+                ", phone=" + phone +
+                ", ifchecked=" + ifchecked +
+                ", teamid=" + teamid +
+                '}';
+    }
 }

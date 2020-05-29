@@ -12,5 +12,7 @@ public interface ProjectMemberMapper {
 
     List<ProjectMember> selectAll();
 
+    List<ProjectMember> selCheckByUser(Integer userid);
+
     int updateByPrimaryKey(ProjectMember record);
 }

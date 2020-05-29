@@ -12,5 +12,9 @@ public interface ProjectInvestmentMapper {
 
     List<ProjectInvestment> selectAll();
 
+    List<ProjectInvestment> selCheckByStudent(Integer userid);
+
+    List<ProjectInvestment> selCheckByInvestor(Integer userid);
+
     int updateByPrimaryKey(ProjectInvestment record);
 }

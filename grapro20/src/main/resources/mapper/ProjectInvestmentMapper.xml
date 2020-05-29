@@ -43,4 +43,14 @@
     select id, project_id, investor_id, amount, cretime, ifchecked, lastchecktime, message
     from project_investment
   </select>
+  <select id="selCheckByStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project_investment.id, project_investment.project_id, project_investment.investor_id, project_investment.amount, project_investment.cretime, project_investment.ifchecked, project_investment.lastchecktime,project_investment.message
+    from project_investment INNER JOIN project
+    where project.student_id=#{userid} and project_investment.project_id = project.id
+  </select>
+  <select id="selCheckByInvestor" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, project_id, investor_id, amount, cretime, ifchecked, lastchecktime, message
+    from project_investment
+    where investor_id=#{userid}
+  </select>
 </mapper>

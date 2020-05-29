@@ -1,6 +1,8 @@
 package com.njusoft.grapro20.mapper;
 
 import com.njusoft.grapro20.model.Admin;
+import com.njusoft.grapro20.model.Student;
+
 import java.util.List;
 
 public interface AdminMapper {
@@ -13,4 +15,6 @@ public interface AdminMapper {
     List<Admin> selectAll();
 
     int updateByPrimaryKey(Admin record);
+
+    List<Student> selStudentMes(Integer userid);
 }

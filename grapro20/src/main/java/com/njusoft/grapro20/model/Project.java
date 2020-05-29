@@ -23,6 +23,8 @@ public class Project {
 
     private String message;
 
+    private Student student;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,30 @@ public class Project {
 
     public void setMessage(String message) {
         this.message = message == null ? null : message.trim();
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", intro='" + intro + '\'' +
+                ", amount=" + amount +
+                ", studentId=" + studentId +
+                ", cretime=" + cretime +
+                ", ifchecked=" + ifchecked +
+                ", lastchecktime=" + lastchecktime +
+                ", message='" + message + '\'' +
+                ", student=" + student +
+                '}';
     }
 }

@@ -71,6 +71,20 @@ public class ProjectInvestment {
         return lastchecktime;
     }
 
+    @Override
+    public String toString() {
+        return "ProjectInvestment{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", investorId=" + investorId +
+                ", amount=" + amount +
+                ", cretime=" + cretime +
+                ", ifchecked=" + ifchecked +
+                ", lastchecktime=" + lastchecktime +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
     public void setLastchecktime(Date lastchecktime) {
         this.lastchecktime = lastchecktime;
     }

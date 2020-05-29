@@ -41,4 +41,9 @@
     select id, project_id, student_id, cretime, ifchecked, lastchecktime, message
     from project_member
   </select>
+  <select id="selCheckByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project_member.id, project_id, project_member.student_id, project_member.cretime, project_member.ifchecked, project_member.lastchecktime, project_member.message
+    from project_member INNER JOIN project
+    where project.student_id=#{userid} and project_member.project_id = project.id
+  </select>
 </mapper>

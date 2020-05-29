@@ -47,4 +47,9 @@
     select id, password, name, intro, age, college, phone, ifchecked, teamid
     from student
   </select>
+  <select id="selStudentMes" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select student.id, student.name, student.intro,age,phone
+    from student inner join admin
+    where admin.id = #{userid,jdbcType=INTEGER} and student.college=admin.name
+  </select>
 </mapper>

@@ -12,6 +12,18 @@
     <result column="ifchecked" jdbcType="INTEGER" property="ifchecked" />
     <result column="lastchecktime" jdbcType="TIMESTAMP" property="lastchecktime" />
     <result column="message" jdbcType="VARCHAR" property="message" />
+    <association property="student" column="student_id" javaType="com.njusoft.grapro20.model.Student">
+    <id property="id" column="sid"/>
+    <result column="sname" property="name"/>
+    <result column="sintro" property="intro"/>
+    <result column="age" property="age"/>
+    <result column="college" property="college"/>
+    <result column="phone" property="phone"/>
+    </association>
+  </resultMap>
+  <resultMap id="StatisticMap" type="ProjectStat">
+    <result property="month" column="p_month" ></result>
+    <result property="num" column="p_num" ></result>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project
@@ -47,8 +59,49 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, type, intro, amount, student_id, cretime, ifchecked, lastchecktime, 
+    select project.id, project.name, type, project.intro, amount, student_id, cretime, project.ifchecked, lastchecktime,
+    message,s.id sid,s.name sname, s.intro sintro,s.age age,s.college college,s.phone phone
+    from project INNER join student s
+    where project.student_id=s.id and project.ifchecked=1
+  </select>
+  <select id="selCheckedByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, type, intro, amount, student_id, cretime, ifchecked, lastchecktime,
     message
     from project
+    where student_id=#{userid} and ifchecked=1
+  </select>
+  <select id="selJoinedByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project.id, name, type, intro, amount, project.student_id, project.cretime
+    from project inner join project_member
+    where project_member.student_id=#{userid} and project_member.ifchecked=1 and project_member.project_id=project.id
+  </select>
+  <select id="selStudentProByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project.id, project.name, type, project.intro, amount, project.student_id, project.cretime
+    from project inner join admin inner join student
+    where admin.id=#{userid} and admin.name=student.college and project.student_id=student.id and project.ifchecked=1
+  </select>
+  <select id="selCheckedByInvestor" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select project.id, name, type, intro, project.amount, student_id,project.cretime
+    from project inner join project_investment
+    where investor_id=#{userid} and project_investment.ifchecked=1 and project_investment.project_id=project.id
+  </select>
+  <select id="selUncheckedByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select id, name, type, intro, amount, student_id, cretime, ifchecked, lastchecktime,
+  message
+  from project
+  where student_id=#{userid} and ifchecked=0
+</select>
+  <select id="selUncheckedBySchool" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select project.id, project.name, type, project.intro, amount, student_id, cretime, project.ifchecked, lastchecktime,
+    message
+    from project INNER join student
+    where student.college=#{name} and student.id=project.student_id and project.ifchecked!=1
+  </select>
+  <select id="queryMonthNum" parameterType="ProjectStat" resultMap="StatisticMap">
+    select month(p.cretime) p_month,count(p.id) p_num from project p
+    inner join student s inner join admin a
+    on p.student_id=s.id and s.college=a.name
+    where year(p.cretime)=#{year} and a.id=#{userId}
+    group by month(p.cretime)
   </select>
 </mapper>
